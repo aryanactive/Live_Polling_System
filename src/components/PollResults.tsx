@@ -5,7 +5,7 @@ import { Progress } from '@/components/ui/progress';
 import { BarChart3, Users, Clock, Plus } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Poll } from '@/types/polling';
-import { usePolling } from '@/contexts/PollingContext';
+import { useSupabasePolling } from '@/contexts/SupabasePollingContext';
 
 interface PollResultsProps {
   poll: Poll;
@@ -14,7 +14,7 @@ interface PollResultsProps {
 }
 
 export function PollResults({ poll, onEndPoll, userVote }: PollResultsProps) {
-  const { state } = usePolling();
+  const { state } = useSupabasePolling();
   const isTeacher = state.user?.role === 'teacher';
 
   const getPercentage = (votes: number) => {

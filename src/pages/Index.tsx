@@ -1,15 +1,15 @@
 import { useState } from 'react';
-import { usePolling } from '@/contexts/PollingContext';
+import { useSupabasePolling } from '@/contexts/SupabasePollingContext';
 import { WelcomeScreen } from '@/components/WelcomeScreen';
 import { UserSetup } from '@/components/UserSetup';
-import { TeacherDashboard } from '@/components/TeacherDashboard';
-import { StudentDashboard } from '@/components/StudentDashboard';
+import { EnhancedTeacherDashboard } from '@/components/EnhancedTeacherDashboard';
+import { EnhancedStudentDashboard } from '@/components/EnhancedStudentDashboard';
 import { KickedOut } from '@/components/KickedOut';
 
 type AppState = 'welcome' | 'setup' | 'dashboard' | 'kicked';
 
 const Index = () => {
-  const { state, joinAsUser } = usePolling();
+  const { state, joinAsUser } = useSupabasePolling();
   const [appState, setAppState] = useState<AppState>('welcome');
   const [selectedRole, setSelectedRole] = useState<'teacher' | 'student' | null>(null);
 
@@ -40,9 +40,9 @@ const Index = () => {
     
     case 'dashboard':
       if (state.user?.role === 'teacher') {
-        return <TeacherDashboard />;
+        return <EnhancedTeacherDashboard />;
       } else {
-        return <StudentDashboard />;
+        return <EnhancedStudentDashboard />;
       }
     
     case 'kicked':

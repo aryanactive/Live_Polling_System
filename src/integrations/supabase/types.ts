@@ -14,7 +14,125 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      chat_messages: {
+        Row: {
+          created_at: string
+          id: string
+          message: string
+          user_name: string
+          user_role: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          message: string
+          user_name: string
+          user_role: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          message?: string
+          user_name?: string
+          user_role?: string
+        }
+        Relationships: []
+      }
+      participants: {
+        Row: {
+          id: string
+          is_active: boolean
+          joined_at: string
+          last_seen: string
+          name: string
+          role: string
+        }
+        Insert: {
+          id?: string
+          is_active?: boolean
+          joined_at?: string
+          last_seen?: string
+          name: string
+          role: string
+        }
+        Update: {
+          id?: string
+          is_active?: boolean
+          joined_at?: string
+          last_seen?: string
+          name?: string
+          role?: string
+        }
+        Relationships: []
+      }
+      poll_votes: {
+        Row: {
+          id: string
+          option_id: string
+          poll_id: string
+          user_id: string
+          voted_at: string
+        }
+        Insert: {
+          id?: string
+          option_id: string
+          poll_id: string
+          user_id: string
+          voted_at?: string
+        }
+        Update: {
+          id?: string
+          option_id?: string
+          poll_id?: string
+          user_id?: string
+          voted_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "poll_votes_poll_id_fkey"
+            columns: ["poll_id"]
+            isOneToOne: false
+            referencedRelation: "polls"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      polls: {
+        Row: {
+          created_at: string
+          created_by: string
+          ended_at: string | null
+          id: string
+          is_active: boolean
+          options: Json
+          question: string
+          time_limit: number
+          total_votes: number
+        }
+        Insert: {
+          created_at?: string
+          created_by: string
+          ended_at?: string | null
+          id?: string
+          is_active?: boolean
+          options: Json
+          question: string
+          time_limit?: number
+          total_votes?: number
+        }
+        Update: {
+          created_at?: string
+          created_by?: string
+          ended_at?: string | null
+          id?: string
+          is_active?: boolean
+          options?: Json
+          question?: string
+          time_limit?: number
+          total_votes?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

@@ -146,9 +146,11 @@ All colors MUST be HSL.
   @keyframes poll-fill {
     from {
       width: 0%;
+      opacity: 0.5;
     }
     to {
       width: var(--poll-width);
+      opacity: 1;
     }
   }
   
@@ -163,12 +165,32 @@ All colors MUST be HSL.
     }
   }
   
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
   @keyframes pulse-glow {
     0%, 100% {
       box-shadow: 0 0 5px hsl(var(--primary) / 0.5);
     }
     50% {
-      box-shadow: 0 0 20px hsl(var(--primary) / 0.8);
+      box-shadow: 0 0 20px hsl(var(--primary) / 0.8), 0 0 30px hsl(var(--primary) / 0.4);
+    }
+  }
+  
+  @keyframes shimmer {
+    0% {
+      background-position: -200px 0;
+    }
+    100% {
+      background-position: calc(200px + 100%) 0;
     }
   }
   
@@ -178,10 +200,33 @@ All colors MUST be HSL.
       hsl(var(--primary-light))
     );
     animation: var(--animation-poll-fill);
+    border-radius: 0.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .poll-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent
+    );
+    animation: shimmer 2s infinite;
   }
   
   .fade-in {
     animation: fade-in 0.5s ease-out;
+  }
+  
+  .slide-up {
+    animation: slide-up 0.6s ease-out;
   }
   
   .pulse-glow {
@@ -195,5 +240,47 @@ All colors MUST be HSL.
   .card-gradient {
     background: var(--gradient-card);
     box-shadow: var(--shadow-card);
+    border: 1px solid hsl(var(--border));
+    transition: all 0.3s ease;
+  }
+  
+  .card-gradient:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px -5px hsl(var(--primary) / 0.2);
+  }
+  
+  /* Enhanced button hover effects */
+  .hover-lift {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px -5px hsl(var(--primary) / 0.3);
+  }
+  
+  /* Loading spinner */
+  .loading-spinner {
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  /* Smooth focus rings */
+  .focus-ring {
+    transition: all 0.2s ease;
+  }
+  
+  .focus-ring:focus {
+    outline: none;
+    ring: 2px solid hsl(var(--primary));
+    ring-offset: 2px;
   }
 }

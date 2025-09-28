@@ -3,14 +3,14 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ArrowLeft, BarChart3, Clock } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { usePolling } from '@/contexts/PollingContext';
+import { useSupabasePolling } from '@/contexts/SupabasePollingContext';
 
 interface PollHistoryProps {
   onBack: () => void;
 }
 
 export function PollHistory({ onBack }: PollHistoryProps) {
-  const { state } = usePolling();
+  const { state } = useSupabasePolling();
 
   const formatDate = (date: Date) => {
     return new Intl.DateTimeFormat('en-US', {
