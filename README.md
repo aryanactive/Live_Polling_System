@@ -2,7 +2,7 @@
 
 ## Project info
 
-**URL**: [https://lovable.dev/projects/282a9789-4ebc-4648-b03f-c34be646b0e3](https://aryanactive.github.io/Live_Polling_System/)
+**URL**: [aryanactive.github.io/Live_Polling_System/](https://aryanactive.github.io/Live_Polling_System/)
 
 ## About The Project:
 
